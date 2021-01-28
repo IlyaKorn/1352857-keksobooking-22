@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Илья Корень](https://up.htmlacademy.ru/javascript/22/user/1352857).
-* Наставник: `Неизвестно`.
+* Наставник: [Магомед Кандаев](https://htmlacademy.ru/profile/magomedkandaev).
 
 ---
 
