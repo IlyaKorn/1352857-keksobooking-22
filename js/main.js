@@ -24,16 +24,17 @@ getRandomFloatNumber(3, 6, 2);
 //ДЗ по 3 лекции
 
 //import _ from 'lodash';
+const COORDINATES_FROMX = 35.65000;
+const COORDINATES_BEFOREX = 35.70000;
+const COORDINATES_FROMY = 139.70000;
+const COORDINATES_BEFOREY = 139.80000;
+const COORDINATES_AFTERPOINT = 5;
+const FINAL_ARRAY_ELEMENTS = 10;
+
 const typePremises = ['palace', 'flat', 'house', 'bungalow'];
-const timeCheckinCheckout = ['12:00', '13:00', '14:00'];
+const elementsEntryDeparture = ['12:00', '13:00', '14:00'];
 const facilities = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-const photoGallery = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
-const coordinatesFromX = 35.65000;
-const coordinatesBeforeX = 35.70000;
-const coordinatesFromY = 139.70000;
-const coordinatesBeforeY = 139.80000;
-const coordinatesAfterPoint = 5;
-const finalArrayElements = 10;
+const listPhotos = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
 const createAuthor = () => {
   return {
@@ -48,17 +49,17 @@ const getRandomElement = (elementsArray) => {
 
 const getCoordinates = () => {
   return {
-    x: getRandomFloatNumber(coordinatesFromX, coordinatesBeforeX, coordinatesAfterPoint),
-    y: getRandomFloatNumber(coordinatesFromY, coordinatesBeforeY, coordinatesAfterPoint),
+    x: getRandomFloatNumber(COORDINATES_FROMX, COORDINATES_BEFOREX, COORDINATES_AFTERPOINT),
+    y: getRandomFloatNumber(COORDINATES_FROMY, COORDINATES_BEFOREY, COORDINATES_AFTERPOINT),
   };
 };
 
-const getInfoAd = () => {
-  const getRandomElementsArray = (randomList) => {
-    const quantityElements = _.random(1, randomList.length - 1);
-    return _.sampleSize(randomList, quantityElements);
-  }
+const getRandomElementsArray = (randomElementsList) => {
+  const quantityElements = _.random(1, randomElementsList.length);
+  return _.sampleSize(randomElementsList, quantityElements);
+};
 
+const getInfoAd = () => {
   return {
     title: 'Aviable offer',
     address: getCoordinates(),
@@ -66,24 +67,24 @@ const getInfoAd = () => {
     type: getRandomElement(typePremises),
     rooms: _.random(1, 30),
     guests: _.random(1, 30),
-    checkin: timeCheckinCheckout[_.random(0, timeCheckinCheckout.length - 1)],
-    checkout: timeCheckinCheckout[_.random(0, timeCheckinCheckout.length - 1)],
+    checkin: getRandomElement(elementsEntryDeparture),
+    checkout: getRandomElement(elementsEntryDeparture),
     features: getRandomElementsArray(facilities),
     description: 'This is a very cozy place for your overnight stay. Here you can have a great rest and make a plan for tomorrow: "Where are we going next?"',
-    photos: getRandomElementsArray(photoGallery),
+    photos: getRandomElementsArray(listPhotos),
   };
 };
 
 const Card = function () {
   this.author = createAuthor();
   this.offer = getInfoAd();
-  this.location = getCoordinates();
+  this.location = this.offer.address;
 };
 
-const getCardsArray = () => {
-  return new Array(finalArrayElements).fill(null).map(() => new Card());
+const getCardsArray = (quantityElements) => {
+  return new Array(quantityElements).fill(null).map(() => new Card());
 };
-getCardsArray();
+getCardsArray(FINAL_ARRAY_ELEMENTS);
 
 
 
