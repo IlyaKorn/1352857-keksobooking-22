@@ -46,12 +46,8 @@ const getRandomElement = (elementsArray) => {
   return _.sample([elementsArray]);
 };
 
-
 const getCoordinates = () => {
-  return {
-    x: getRandomFloatNumber(COORDINATES_FROMX, COORDINATES_BEFOREX, COORDINATES_AFTERPOINT),
-    y: getRandomFloatNumber(COORDINATES_FROMY, COORDINATES_BEFOREY, COORDINATES_AFTERPOINT),
-  };
+  return 'x: ' + getRandomFloatNumber(COORDINATES_FROMX, COORDINATES_BEFOREX, COORDINATES_AFTERPOINT) + ', ' + 'y: ' + getRandomFloatNumber(COORDINATES_FROMY, COORDINATES_BEFOREY, COORDINATES_AFTERPOINT);
 };
 
 const getRandomElementsArray = (randomElementsList) => {
@@ -62,7 +58,7 @@ const getRandomElementsArray = (randomElementsList) => {
 const getInfoAd = () => {
   return {
     title: 'Aviable offer',
-    address: getCoordinates(),
+    address: '',
     price: _.random(1, 1000000),
     type: getRandomElement(typePremises),
     rooms: _.random(1, 30),
@@ -78,13 +74,14 @@ const getInfoAd = () => {
 const Card = function () {
   this.author = createAuthor();
   this.offer = getInfoAd();
-  this.location = this.offer.address;
+  this.offer.address = getCoordinates();
+  this.location = {
+    location: this.offer.address,
+  };
 };
 
 const getCardsArray = (quantityElements) => {
   return new Array(quantityElements).fill(null).map(() => new Card());
 };
 getCardsArray(FINAL_ARRAY_ELEMENTS);
-
-
-
+console.log(getCardsArray(FINAL_ARRAY_ELEMENTS));
