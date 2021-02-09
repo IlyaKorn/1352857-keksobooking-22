@@ -46,19 +46,15 @@ const getRandomElement = (elementsArray) => {
   return _.sample([elementsArray]);
 };
 
-const getCoordinates = () => {
-  return 'x: ' + getRandomFloatNumber(COORDINATES_FROMX, COORDINATES_BEFOREX, COORDINATES_AFTERPOINT) + ', ' + 'y: ' + getRandomFloatNumber(COORDINATES_FROMY, COORDINATES_BEFOREY, COORDINATES_AFTERPOINT);
-};
-
 const getRandomElementsArray = (randomElementsList) => {
   const quantityElements = _.random(1, randomElementsList.length);
   return _.sampleSize(randomElementsList, quantityElements);
 };
 
-const getInfoAd = () => {
+const getInfoAd = (coordinatesAxisX, coordinatesAxisY) => {
   return {
     title: 'Aviable offer',
-    address: '',
+    address: 'x: ' + coordinatesAxisX + ', ' + 'y: ' + coordinatesAxisY,
     price: _.random(1, 1000000),
     type: getRandomElement(typePremises),
     rooms: _.random(1, 30),
@@ -72,11 +68,13 @@ const getInfoAd = () => {
 };
 
 const Card = function () {
+  const coordinateX = getRandomFloatNumber(COORDINATES_FROMX, COORDINATES_BEFOREX, COORDINATES_AFTERPOINT);
+  const coordinateY = getRandomFloatNumber(COORDINATES_FROMY, COORDINATES_BEFOREY, COORDINATES_AFTERPOINT);
   this.author = createAuthor();
-  this.offer = getInfoAd();
-  this.offer.address = getCoordinates();
+  this.offer = getInfoAd(coordinateX, coordinateY);
   this.location = {
-    location: this.offer.address,
+    x: coordinateX,
+    y: coordinateY,
   };
 };
 
@@ -84,4 +82,3 @@ const getCardsArray = (quantityElements) => {
   return new Array(quantityElements).fill(null).map(() => new Card());
 };
 getCardsArray(FINAL_ARRAY_ELEMENTS);
-console.log(getCardsArray(FINAL_ARRAY_ELEMENTS));
