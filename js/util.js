@@ -1,3 +1,4 @@
+//import _ from ('lodash');
 const getRandomNumber = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max)
@@ -16,5 +17,17 @@ const getRandomFloatNumber = (min, max, afterPoint) => {
   return Number(Math.abs(Math.random() * (max - min) + min).toFixed(afterPoint));
 };
 
+const getRandomElementsArray = (randomElementsList) => {
+  const quantityElements = _.random(1, randomElementsList.length);
+  return _.sampleSize(randomElementsList, quantityElements);
+};
+
+const getRandomElement = (elementsArray) => {
+  return _.sample([elementsArray]);
+};
+
+
+export {getRandomElement};
+export {getRandomElementsArray};
 export {getRandomNumber};
 export {getRandomFloatNumber};

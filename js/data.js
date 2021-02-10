@@ -1,6 +1,8 @@
 //import _ from ('lodash');
-import {getRandomElement} from './get-random-element.js';
-import {getRandomElementsArray} from './get-random-elements-array.js'
+import {getRandomElement} from './util.js';
+import {getRandomElementsArray} from './util.js'
+import {getRandomNumber} from './util.js';
+import {Card} from './Card.js';
 
 const typePremises = ['palace', 'flat', 'house', 'bungalow'];
 const elementsEntryDeparture = ['12:00', '13:00', '14:00'];
@@ -23,4 +25,16 @@ const getInfoAd = (coordinatesAxisX, coordinatesAxisY) => {
   };
 };
 
+const createAuthor = () => {
+  return {
+    avatar: `img/avatars/user0${getRandomNumber(1, 8)}.png`,
+  };
+};
+
+const getCardsArray = (quantityElements) => {
+  return new Array(quantityElements).fill(null).map(() => new Card());
+};
+
+export {createAuthor};
+export {getCardsArray};
 export {getInfoAd};

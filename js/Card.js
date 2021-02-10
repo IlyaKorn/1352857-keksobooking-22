@@ -1,5 +1,5 @@
-import {createAuthor} from './create-author.js'
-import {getInfoAd} from './get-info-ad.js'
+import {createAuthor} from './data.js'
+import {getInfoAd} from './data.js'
 import {getRandomFloatNumber} from './util.js'
 
 const COORDINATES_FROMX = 35.65000;
