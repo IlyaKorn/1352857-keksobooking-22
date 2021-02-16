@@ -22,8 +22,8 @@ const getRandomElementsArray = (randomElementsList) => {
   return _.sampleSize(randomElementsList, quantityElements);
 };
 
-const getRandomElement = ([elementsArray]) => {
-  return _.sample([elementsArray]);
+const getRandomElement = (elementsArray) => {
+  return _.sample(elementsArray);
 };
 
 

@@ -1,9 +1,4 @@
-import {getCardsArray} from './data.js';
 const templateFragment = document.querySelector('#card').content;
-const template = templateFragment.querySelector('article');
-const fragment = document.createDocumentFragment();
-const quantityCardsFixed = 10;
-const simiralAds = getCardsArray(quantityCardsFixed);
 const mapCanvas = document.querySelector('.map__canvas');
 
 const getTypePalace = (typeHousing) => {
@@ -21,20 +16,62 @@ const getTypePalace = (typeHousing) => {
   }
 };
 
-for (let i = 0; i < 10; i++) {
-  const elementArds = template.cloneNode(true);
-  elementArds.classList.add('popup');
-  elementArds.querySelector('.popup__title').textContent = simiralAds[i].offer.title;
-  elementArds.querySelector('.popup__text--address').textContent = simiralAds[i].offer.address;
-  elementArds.querySelector('.popup__text--price').textContent = simiralAds[i].offer.price + ' ₽/ночь';
-  elementArds.querySelector('.popup__type').textContent = getTypePalace(simiralAds[i].offer.type);
-  elementArds.querySelector('.popup__text--capacity').textContent = simiralAds[i].offer.rooms + ' комнаты для ' + simiralAds[i].offer.guests + ' гостей';
-  elementArds.querySelector('.popup__text--time').textContent = 'Заезд после ' + simiralAds[i].offer.checkin + ', выезд до ' + simiralAds[i].offer.checkout;
-  elementArds.querySelector('.popup__features').textContent = simiralAds[i].offer.features;
-  elementArds.querySelector('.popup__description').textContent = simiralAds[i].offer.description;
-  elementArds.querySelector('.popup__photo').src = simiralAds[i].author.avatar;
+const getTextCase = (number, one, two, five) => {
+  number %= 100;
+  if (number >= 5 && number <= 20) {
+    return five;
+  }
+  number %= 10;
+  if (number == 1) {
+    return one;
+  }
+  if (number >= 2 && number <= 4) {
+    return two;
+  }
+  return five;
+};
 
-  fragment.appendChild(elementArds);
-}
+const createListElement = (elementArray) => {
+  const fragment = document.createDocumentFragment();
+  for (let i = 0; i < elementArray.length; i++) {
+    const listElement = document.createElement('li');
+    listElement.classList.add('popup__feature');
+    listElement.classList.add('popup__feature' + '--' + elementArray[i]);
+    fragment.appendChild(listElement);
+  }
+  return fragment
+};
 
-mapCanvas.appendChild(fragment.firstElementChild);
+const createPhotoElement = (elementArray) => {
+  const fragment = document.createDocumentFragment();
+  for (let i = 0; i < elementArray.length; i++) {
+    const photoElement = document.createElement('img');
+    photoElement.classList.add('popup__photo');
+    photoElement.src = (elementArray[i]);
+    photoElement.width = 45;
+    photoElement.height = 40;
+    fragment.appendChild(photoElement);
+  }
+  return fragment
+};
+
+
+const getPopUp = (cardData) => {
+  const template = templateFragment.querySelector('.popup');
+  const elementAds = template.cloneNode(cardData);
+  elementAds.querySelector('.popup__title').textContent = cardData.offer.title;
+  elementAds.querySelector('.popup__text--address').textContent = cardData.offer.address;
+  elementAds.querySelector('.popup__text--price').textContent = cardData.offer.price + ' ₽/ночь';
+  elementAds.querySelector('.popup__type').textContent = getTypePalace(cardData.offer.type);
+  elementAds.querySelector('.popup__text--capacity').textContent = cardData.offer.rooms + ' ' + getTextCase(cardData.offer.rooms, 'комнат', 'комнаты', 'комнат') + ' для ' + cardData.offer.guests + ' ' + getTextCase(cardData.offer.guests, 'гостя', 'гостей', 'гостей');
+  elementAds.querySelector('.popup__text--time').textContent = 'Заезд после ' + cardData.offer.checkin + ', выезд до ' + cardData.offer.checkout;
+  elementAds.querySelector('.popup__features').innerHTML = '';
+  elementAds.querySelector('.popup__features').appendChild(createListElement(cardData.offer.features));
+  elementAds.querySelector('.popup__description').textContent = cardData.offer.description;
+  elementAds.querySelector('.popup__avatar').src = cardData.author.avatar;
+  elementAds.querySelector('.popup__photos').innerHTML = '';
+  elementAds.querySelector('.popup__photos').appendChild(createPhotoElement(cardData.offer.photos));
+  mapCanvas.appendChild(elementAds);
+};
+
+export {getPopUp};
