@@ -22,7 +22,7 @@ const getTextCase = (number, one, two, five) => {
     return five;
   }
   number %= 10;
-  if (number == 1) {
+  if (number === 1) {
     return one;
   }
   if (number >= 2 && number <= 4) {
@@ -31,34 +31,33 @@ const getTextCase = (number, one, two, five) => {
   return five;
 };
 
-const createListElement = (elementArray) => {
+const createFutureElement = (listElemenstFeatures) => {
   const fragment = document.createDocumentFragment();
-  for (let i = 0; i < elementArray.length; i++) {
+  listElemenstFeatures.forEach(function(currentValue) {
     const listElement = document.createElement('li');
-    listElement.classList.add('popup__feature');
-    listElement.classList.add('popup__feature' + '--' + elementArray[i]);
+    listElement.className = `popup__feature popup__feature--${currentValue}`;
     fragment.appendChild(listElement);
-  }
+  })
   return fragment
 };
 
-const createPhotoElement = (elementArray) => {
+const createPhotoElement = (listPhotos) => {
   const fragment = document.createDocumentFragment();
-  for (let i = 0; i < elementArray.length; i++) {
+  listPhotos.forEach(function(currentValue) {
     const photoElement = document.createElement('img');
     photoElement.classList.add('popup__photo');
-    photoElement.src = (elementArray[i]);
+    photoElement.src = (currentValue);
     photoElement.width = 45;
     photoElement.height = 40;
     fragment.appendChild(photoElement);
-  }
+  })
   return fragment
 };
 
 
 const getPopUp = (cardData) => {
   const template = templateFragment.querySelector('.popup');
-  const elementAds = template.cloneNode(cardData);
+  const elementAds = template.cloneNode(true);
   elementAds.querySelector('.popup__title').textContent = cardData.offer.title;
   elementAds.querySelector('.popup__text--address').textContent = cardData.offer.address;
   elementAds.querySelector('.popup__text--price').textContent = cardData.offer.price + ' ₽/ночь';
@@ -66,7 +65,7 @@ const getPopUp = (cardData) => {
   elementAds.querySelector('.popup__text--capacity').textContent = cardData.offer.rooms + ' ' + getTextCase(cardData.offer.rooms, 'комнат', 'комнаты', 'комнат') + ' для ' + cardData.offer.guests + ' ' + getTextCase(cardData.offer.guests, 'гостя', 'гостей', 'гостей');
   elementAds.querySelector('.popup__text--time').textContent = 'Заезд после ' + cardData.offer.checkin + ', выезд до ' + cardData.offer.checkout;
   elementAds.querySelector('.popup__features').innerHTML = '';
-  elementAds.querySelector('.popup__features').appendChild(createListElement(cardData.offer.features));
+  elementAds.querySelector('.popup__features').appendChild(createFutureElement(cardData.offer.features));
   elementAds.querySelector('.popup__description').textContent = cardData.offer.description;
   elementAds.querySelector('.popup__avatar').src = cardData.author.avatar;
   elementAds.querySelector('.popup__photos').innerHTML = '';
