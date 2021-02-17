@@ -23,7 +23,7 @@ const getRandomElementsArray = (randomElementsList) => {
 };
 
 const getRandomElement = (elementsArray) => {
-  return _.sample([elementsArray]);
+  return _.sample(elementsArray);
 };
 
 
