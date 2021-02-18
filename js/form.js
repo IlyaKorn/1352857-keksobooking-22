@@ -9,17 +9,23 @@ const minPrice = {
   palace: 10000,
 };
 
-cellPrice.setAttribute('placeholder', 1000);
-
-typeBuilding.onchange = function() {
+const onTypeBuldingChange = function() {
   const price = minPrice[this.value];
   cellPrice.setAttribute('min', price);
   cellPrice.setAttribute('placeholder', price)
 };
 
-timeIn.onchange = function() {
+const onTimeInChange = () => {
   timeOut.selectedIndex = timeIn.selectedIndex;
 };
-timeOut.onchange = function() {
+
+const onTimeOutChange = () => {
   timeIn.selectedIndex = timeOut.selectedIndex;
 };
+
+typeBuilding.addEventListener('change', onTypeBuldingChange);
+
+timeIn.addEventListener('change', onTimeInChange);
+
+timeOut.addEventListener('change', onTimeOutChange);
+
