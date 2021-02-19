@@ -1,8 +1,9 @@
 //import _ from ('lodash');
+/* global _:readonly */
 import {getRandomElement} from './util.js';
 import {getRandomElementsArray} from './util.js'
 import {getRandomNumber} from './util.js';
-import {getRandomFloatNumber} from './util.js'
+import {getRandomFloatNumber} from './util.js';
 
 const typePremises = ['palace', 'flat', 'house', 'bungalow'];
 const elementsEntryDeparture = ['12:00', '13:00', '14:00'];

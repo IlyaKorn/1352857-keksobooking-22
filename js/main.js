@@ -1,8 +1,4 @@
-import {getCardsArray} from './data.js';
-import {getPopUp} from './popup.js';
+import './data.js';
 import './form.js';
-const FINAL_ARRAY_ELEMENTS = 10;
+import './map.js';
 
-const testDataArray = getCardsArray(FINAL_ARRAY_ELEMENTS);
-
-getPopUp(testDataArray[0]);

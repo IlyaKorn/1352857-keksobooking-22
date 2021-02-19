@@ -1,4 +1,11 @@
 //import _ from ('lodash');
+/* global _:readonly */
+const adForm = document.querySelector('.ad-form');
+const adFormFieldSet = adForm.querySelectorAll('.ad-form__element');
+const mapFilters = document.querySelector('.map__filters');
+const mapFiltersSelect = mapFilters.querySelectorAll('.map__filter');
+const mapFiltersFieldSetFeatures = mapFilters.querySelector('.map__features');
+
 const getRandomNumber = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max)
@@ -26,8 +33,38 @@ const getRandomElement = (elementsArray) => {
   return _.sample(elementsArray);
 };
 
+const disableForm = () => {
+  adForm.classList.add('ad-form--disabled');
+  mapFilters.classList.add('map__filters--disabled');
+  mapFiltersFieldSetFeatures.setAttribute('disabled', 'disabled');
+
+  for (let i = 0; i < adFormFieldSet.length; i ++) {
+    adFormFieldSet[i].setAttribute('disabled', 'disabled');
+  }
+
+  for (let j = 0; j < mapFiltersSelect.length; j++) {
+    mapFiltersSelect[j].setAttribute('disabled', 'disabled');
+  }
+};
+
+const activateForm = () => {
+  adForm.classList.remove('ad-form--disabled');
+  mapFilters.classList.remove('map__filters--disabled');
+  mapFiltersFieldSetFeatures.removeAttribute('disabled');
+  for (let i = 0; i < adFormFieldSet.length; i ++) {
+    adFormFieldSet[i].removeAttribute('disabled');
+  }
+
+  for (let j = 0; j < mapFiltersSelect.length; j++) {
+    mapFiltersSelect[j].removeAttribute('disabled');
+  }
+};
+
+disableForm();
 
 export {getRandomElement};
 export {getRandomElementsArray};
 export {getRandomNumber};
 export {getRandomFloatNumber};
+export {disableForm};
+export {activateForm};
