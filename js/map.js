@@ -12,7 +12,7 @@ const MAIN_ICON_SIZE_HEIGHT = 52;
 const MAIN_ICON_ANCHOR_SIZE_WIDTH = 26;
 const MAIN_ICON_ANCHOR_SIZE_HEIGHT = 52;
 const MAIN_MARKER_DEFAULT_COORDINATE_X = 35.40480;
-const MAIN_MARKER_DEFAUL_COORDINATE_Y = 139.45360;
+const MAIN_MARKER_DEFAULT_COORDINATE_Y = 139.45360;
 const SECONDARY_ICON_SIZE_WIDTH = 46;
 const SECONDARY_ICON_SIZE_HEIGHT = 46;
 const SECONDARY_ICON_ANCHOR_SIZE_WIDTH = 23;
@@ -35,11 +35,11 @@ const disablePage = () => {
   mapFiltersFieldSetFeatures.setAttribute('disabled', 'disabled');
   loadingAvatar.setAttribute('disabled', 'disabled');
 
-  for (let value of adFormFieldSet) {
+  for (const value of adFormFieldSet) {
     value.setAttribute('disabled', 'disabled');
   }
 
-  for (let value of mapFiltersSelect) {
+  for (const value of mapFiltersSelect) {
     value.setAttribute('disabled', 'disabled');
   }
 };
@@ -50,11 +50,11 @@ const activatePage = () => {
   adForm.classList.remove('ad-form--disabled');
   mapFilters.classList.remove('map__filters--disabled');
   mapFiltersFieldSetFeatures.removeAttribute('disabled');
-  for (let value of  adFormFieldSet) {
+  for (const value of  adFormFieldSet) {
     value.removeAttribute('disabled');
   }
 
-  for (let value of mapFiltersSelect) {
+  for (const value of mapFiltersSelect) {
     value.removeAttribute('disabled');
   }
 };
@@ -84,7 +84,7 @@ const mainPinIcon = L.icon({
 const mainPinMarker = L.marker(
   {
     lat: MAIN_MARKER_DEFAULT_COORDINATE_X,
-    lng: MAIN_MARKER_DEFAUL_COORDINATE_Y ,
+    lng: MAIN_MARKER_DEFAULT_COORDINATE_Y ,
   },
   {
     draggable: true,
