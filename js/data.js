@@ -1,17 +1,18 @@
 //import _ from ('lodash');
+/* global _:readonly */
 import {getRandomElement} from './util.js';
 import {getRandomElementsArray} from './util.js'
 import {getRandomNumber} from './util.js';
-import {getRandomFloatNumber} from './util.js'
+import {getRandomFloatNumber} from './util.js';
 
 const typePremises = ['palace', 'flat', 'house', 'bungalow'];
 const elementsEntryDeparture = ['12:00', '13:00', '14:00'];
 const facilities = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const listPhotos = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
-const COORDINATES_FROMX = 35.65000;
-const COORDINATES_BEFOREX = 35.70000;
-const COORDINATES_FROMY = 139.70000;
-const COORDINATES_BEFOREY = 139.80000;
+const COORDINATES_FROMX = 35.30480;
+const COORDINATES_BEFOREX = 35.46529;
+const COORDINATES_FROMY = 139.36060;
+const COORDINATES_BEFOREY = 139.55809;
 const COORDINATES_AFTERPOINT = 5;
 
 const getInfoAd = (coordinatesAxisX, coordinatesAxisY) => {

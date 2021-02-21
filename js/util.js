@@ -1,4 +1,5 @@
 //import _ from ('lodash');
+/* global _:readonly */
 const getRandomNumber = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max)
@@ -25,7 +26,6 @@ const getRandomElementsArray = (randomElementsList) => {
 const getRandomElement = (elementsArray) => {
   return _.sample(elementsArray);
 };
-
 
 export {getRandomElement};
 export {getRandomElementsArray};

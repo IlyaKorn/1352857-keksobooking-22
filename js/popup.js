@@ -1,5 +1,4 @@
 const templateFragment = document.querySelector('#card').content;
-const mapCanvas = document.querySelector('.map__canvas');
 
 const getTypePalace = (typeHousing) => {
   switch (typeHousing) {
@@ -70,7 +69,7 @@ const getPopUp = (cardData) => {
   elementAds.querySelector('.popup__avatar').src = cardData.author.avatar;
   elementAds.querySelector('.popup__photos').innerHTML = '';
   elementAds.querySelector('.popup__photos').appendChild(createPhotoElement(cardData.offer.photos));
-  mapCanvas.appendChild(elementAds);
+  return elementAds;
 };
 
 export {getPopUp};
