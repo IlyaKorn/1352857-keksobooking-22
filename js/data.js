@@ -5,7 +5,7 @@ import {getRandomElementsArray} from './util.js'
 import {getRandomNumber} from './util.js';
 import {getRandomFloatNumber} from './util.js';
 
-const typePremises = ['palace', 'flat', 'house', 'bungalow'];
+/*const typePremises = ['palace', 'flat', 'house', 'bungalow'];
 const elementsEntryDeparture = ['12:00', '13:00', '14:00'];
 const facilities = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const listPhotos = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
@@ -36,8 +36,9 @@ const createAuthor = () => {
     avatar: `img/avatars/user0${getRandomNumber(1, 8)}.png`,
   };
 };
+*/
 
-const Card = function () {
+/*const Card = function () {
   const coordinateX = getRandomFloatNumber(COORDINATES_FROMX, COORDINATES_BEFOREX, COORDINATES_AFTERPOINT);
   const coordinateY = getRandomFloatNumber(COORDINATES_FROMY, COORDINATES_BEFOREY, COORDINATES_AFTERPOINT);
   this.author = createAuthor();
@@ -56,3 +57,4 @@ export {createAuthor};
 export {getCardsArray};
 export {getInfoAd};
 export {Card};
+*/

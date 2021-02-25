@@ -1,6 +1,6 @@
 //import L from 'leaflet';
 /* global L:readonly */
-import {getCardsArray} from './data.js';
+//import {getCardsArray} from './data.js';
 import {getPopUp} from './popup.js';
 
 
@@ -24,7 +24,7 @@ const mapFilters = document.querySelector('.map__filters');
 const mapFiltersSelect = mapFilters.querySelectorAll('.map__filter');
 const mapFiltersFieldSetFeatures = mapFilters.querySelector('.map__features');
 const loadingAvatar = document.querySelector('#avatar');
-const adsData = getCardsArray(FINAL_ARRAY_ELEMENTS);
+//const adsData = getCardsArray(FINAL_ARRAY_ELEMENTS);
 
 tabAddressCoordinates.value = CITY_COORDINATE_X.toFixed(5) + ', ' + CITY_COORDINATE_Y.toFixed(5);
 tabAddressCoordinates.setAttribute('readonly', 'readonly');
@@ -98,7 +98,7 @@ mainPinMarker.on('move', (evt) => {
   tabAddressCoordinates.value = (evt.target.getLatLng().lat.toFixed(5) + ', ' + evt.target.getLatLng().lng.toFixed(5));
 });
 
-const drawMapElements = () => {
+const drawMapElements = (adsData) => {
   const secondaryPinIcon = L.icon({
     iconUrl: '../img/pin.svg',
     iconSize: [SECONDARY_ICON_SIZE_WIDTH, SECONDARY_ICON_SIZE_HEIGHT],
@@ -119,5 +119,5 @@ const drawMapElements = () => {
   });
 };
 
-drawMapElements();
+export {drawMapElements};
 
