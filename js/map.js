@@ -1,12 +1,11 @@
+'use strict';
 //import L from 'leaflet';
 /* global L:readonly */
 //import {getCardsArray} from './data.js';
 import {getPopUp} from './popup.js';
 
-
 const CITY_COORDINATE_X = 35.40480;
 const CITY_COORDINATE_Y = 139.45360;
-const FINAL_ARRAY_ELEMENTS = 10;
 const MAIN_ICON_SIZE_WIDTH = 52;
 const MAIN_ICON_SIZE_HEIGHT = 52;
 const MAIN_ICON_ANCHOR_SIZE_WIDTH = 26;
@@ -24,7 +23,6 @@ const mapFilters = document.querySelector('.map__filters');
 const mapFiltersSelect = mapFilters.querySelectorAll('.map__filter');
 const mapFiltersFieldSetFeatures = mapFilters.querySelector('.map__features');
 const loadingAvatar = document.querySelector('#avatar');
-//const adsData = getCardsArray(FINAL_ARRAY_ELEMENTS);
 
 tabAddressCoordinates.value = CITY_COORDINATE_X.toFixed(5) + ', ' + CITY_COORDINATE_Y.toFixed(5);
 tabAddressCoordinates.setAttribute('readonly', 'readonly');
@@ -84,7 +82,7 @@ const mainPinIcon = L.icon({
 const mainPinMarker = L.marker(
   {
     lat: MAIN_MARKER_DEFAULT_COORDINATE_X,
-    lng: MAIN_MARKER_DEFAULT_COORDINATE_Y ,
+    lng: MAIN_MARKER_DEFAULT_COORDINATE_Y,
   },
   {
     draggable: true,
@@ -107,8 +105,8 @@ const drawMapElements = (adsData) => {
   adsData.forEach(function(ad) {
     const secondaryPinMarker = L.marker(
       {
-        lat: ad.location.x,
-        lng: ad.location.y,
+        lat: ad.location.lat,
+        lng: ad.location.lng,
       },
       {
         icon: secondaryPinIcon,
@@ -119,5 +117,12 @@ const drawMapElements = (adsData) => {
   });
 };
 
-export {drawMapElements};
+const returnMainMarkerPosition = () => {
+  mainPinMarker.setLatLng([MAIN_MARKER_DEFAULT_COORDINATE_X, MAIN_MARKER_DEFAULT_COORDINATE_Y]);
+  tabAddressCoordinates.value = CITY_COORDINATE_X.toFixed(5) + ', ' + CITY_COORDINATE_Y.toFixed(5);
+};
 
+
+export {drawMapElements};
+export {mainPinMarker};
+export {returnMainMarkerPosition};

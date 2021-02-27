@@ -1,4 +1,4 @@
-import './data.js';
+'use strict';
 import './form.js';
 import './map.js';
 import './validation-form.js';
