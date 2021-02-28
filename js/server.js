@@ -1,7 +1,8 @@
 'use strict';
 import {drawMapElements} from './map.js';
-
-const DisplayErrorMessage = () => {
+const SERVER_DATA = 'https://22.javascript.pages.academy/keksobooking/data';
+const SERVER_POST = 'https://22.javascript.pages.academy/keksobooking';
+const displayErrorMessage = () => {
   const promo = document.querySelector('.promo');
   const divError = document.createElement('div');
   divError.innerHTML = 'Объявления на карте не загружены. Попробуйте обновить страницу';
@@ -31,19 +32,24 @@ const checkServerStatus = (response) => {
   if (response.ok) {
     return response;
   } else {
-    DisplayErrorMessage();
+    displayErrorMessage();
     const {statusText, status} = response;
     throw new Error (`${status} - ${statusText}`);
   }
 };
 
 
-fetch('https://22.javascript.pages.academy/keksobooking/data')
+fetch(SERVER_DATA)
   .then(checkServerStatus)
   .then((response) => response.json())
   .then(drawMapElements)
-  .catch((error) => console.log(error));
+  .catch((error) => (error));
 
-
-
-
+const pullDataServer = (formData) => {
+  return fetch(SERVER_POST,
+    {
+      method: 'POST',
+      body: formData,
+    })
+};
+export {pullDataServer};

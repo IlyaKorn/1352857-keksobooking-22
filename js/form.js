@@ -1,5 +1,7 @@
 'use strict';
 import {returnMainMarkerPosition} from './map.js';
+import {pullDataServer} from './server.js';
+import {resetAddressCoordinates} from './map.js';
 
 const typeBuilding = document.querySelector('#type');
 const cellPrice = document.querySelector('#price');
@@ -86,16 +88,17 @@ const showErrorMessage = (element) => {
 
 //Сброс формы по нажатию кнопки "Очистить"
 
-clearButton.addEventListener('click', () => {
+clearButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
   adForm.reset();
   returnMainMarkerPosition();
+  resetAddressCoordinates();
 });
 
 const checkStatus = (response) => {
   if (response.ok) {
     return response;
   } else {
-    showErrorMessage(error);
     throw Error('Произошла ошибка при отправке данных на сервер');
   }
 };
@@ -105,15 +108,10 @@ adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const formData = new FormData(evt.target);
 
-  fetch(
-    'https://22.javascript.pages.academy/keksobooking',
-    {
-      method: 'POST',
-      body: formData,
-    },
-  )
+  pullDataServer(formData)
     .then(checkStatus)
     .then(() => adForm.reset())
     .then(() => returnMainMarkerPosition())
     .then(() => showSuccessfulMessage(successBlock))
+    .catch(() => showErrorMessage(error))
 });

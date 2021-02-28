@@ -1,7 +1,6 @@
 'use strict';
 //import L from 'leaflet';
 /* global L:readonly */
-//import {getCardsArray} from './data.js';
 import {getPopUp} from './popup.js';
 
 const CITY_COORDINATE_X = 35.40480;
@@ -26,6 +25,10 @@ const loadingAvatar = document.querySelector('#avatar');
 
 tabAddressCoordinates.value = CITY_COORDINATE_X.toFixed(5) + ', ' + CITY_COORDINATE_Y.toFixed(5);
 tabAddressCoordinates.setAttribute('readonly', 'readonly');
+
+const resetAddressCoordinates = () => {
+  tabAddressCoordinates.value = CITY_COORDINATE_X.toFixed(5) + ', ' + CITY_COORDINATE_Y.toFixed(5);
+};
 
 const disablePage = () => {
   adForm.classList.add('ad-form--disabled');
@@ -126,3 +129,4 @@ const returnMainMarkerPosition = () => {
 export {drawMapElements};
 export {mainPinMarker};
 export {returnMainMarkerPosition};
+export {resetAddressCoordinates};
