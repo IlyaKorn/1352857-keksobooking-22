@@ -134,7 +134,7 @@ const removeMarkers = () => {
   mainPinMarker.addTo(map);
 };
 
-const clostBallong = () => {
+const closeBallong = () => {
   map.closePopup();
 }
 
@@ -143,4 +143,4 @@ export {mainPinMarker};
 export {returnMainMarkerPosition};
 export {resetAddressCoordinates};
 export {removeMarkers};
-export {clostBallong};
+export {closeBallong};
