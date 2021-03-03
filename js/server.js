@@ -1,5 +1,7 @@
 'use strict';
 import {drawMapElements} from './map.js';
+import {filterOutHousingTypes} from './filter.js';
+
 const SERVER_DATA = 'https://22.javascript.pages.academy/keksobooking/data';
 const SERVER_POST = 'https://22.javascript.pages.academy/keksobooking';
 const displayErrorMessage = () => {
@@ -43,6 +45,7 @@ fetch(SERVER_DATA)
   .then(checkServerStatus)
   .then((response) => response.json())
   .then(drawMapElements)
+  .then(filterOutHousingTypes)
   .catch((error) => (error));
 
 const pullDataServer = (formData) => {

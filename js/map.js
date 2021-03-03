@@ -105,7 +105,7 @@ const drawMapElements = (adsData) => {
     iconSize: [SECONDARY_ICON_SIZE_WIDTH, SECONDARY_ICON_SIZE_HEIGHT],
     iconAnchor: [SECONDARY_ICON_ANCHOR_SIZE_WIDTH, SECONDARY_ICON_ANCHOR_SIZE_HEIGHT],
   });
-  adsData.forEach(function(ad) {
+  adsData.slice(0, 10).forEach(function(ad) {
     const secondaryPinMarker = L.marker(
       {
         lat: ad.location.lat,
@@ -118,6 +118,7 @@ const drawMapElements = (adsData) => {
     secondaryPinMarker.addTo(map);
     secondaryPinMarker.bindPopup(getPopUp(ad));
   });
+  return adsData;
 };
 
 const returnMainMarkerPosition = () => {
@@ -125,8 +126,21 @@ const returnMainMarkerPosition = () => {
   tabAddressCoordinates.value = CITY_COORDINATE_X.toFixed(5) + ', ' + CITY_COORDINATE_Y.toFixed(5);
 };
 
+const removeMarkers = () => {
+  map.eachLayer((layer) => {
+    if (layer.getElement) {
+      layer.remove() }
+  });
+  mainPinMarker.addTo(map);
+};
+
+const clostBallong = () => {
+  map.closePopup();
+}
 
 export {drawMapElements};
 export {mainPinMarker};
 export {returnMainMarkerPosition};
 export {resetAddressCoordinates};
+export {removeMarkers};
+export {clostBallong};
