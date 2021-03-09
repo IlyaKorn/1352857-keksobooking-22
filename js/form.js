@@ -3,6 +3,8 @@ import {returnMainMarkerPosition} from './map.js';
 import {pullDataServer} from './server.js';
 import {resetAddressCoordinates} from './map.js';
 
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
 const typeBuilding = document.querySelector('#type');
 const cellPrice = document.querySelector('#price');
 const timeIn = document.querySelector('#timein');
@@ -17,6 +19,12 @@ const errorMessage = errorTemplate.querySelector('.error');
 const error = errorMessage.cloneNode('true');
 const buttonClose = error.querySelector('.error__button');
 const clearButton = document.querySelector('.ad-form__reset');
+const fileChoser = document.querySelector('#avatar');
+const avatarBlock = document.querySelector('.ad-form-header__preview');
+const previewAvatar = avatarBlock.querySelector('img');
+const fileChoserHousing = document.querySelector('#images');
+const previewPhotoHousing = document.querySelector('.ad-form__photo');
+
 
 const minPrice = {
   flat: 1000,
@@ -102,6 +110,50 @@ const checkStatus = (response) => {
     throw Error('Произошла ошибка при отправке данных на сервер');
   }
 };
+
+// Загрузка аватара
+fileChoser.addEventListener('change', () => {
+  const file = fileChoser.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => {
+    return fileName.endsWith(it);
+  });
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      previewAvatar.src = reader.result;
+    });
+
+    reader.readAsDataURL(file);
+  }
+});
+
+// Загрузка фотографии жилья
+fileChoserHousing.addEventListener('change', () => {
+  const imageItem = new Image(70, 70);
+  imageItem.setAttribute('alt', 'Фотография жилья');
+  previewPhotoHousing.appendChild(imageItem);
+
+  const file = fileChoserHousing.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => {
+    return fileName.endsWith(it);
+  });
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      imageItem.src = reader.result;
+    });
+
+    reader.readAsDataURL(file);
+  }
+});
 
 // Отправка формы
 adForm.addEventListener('submit', (evt) => {
