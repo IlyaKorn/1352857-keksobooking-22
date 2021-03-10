@@ -101,6 +101,8 @@ clearButton.addEventListener('click', (evt) => {
   adForm.reset();
   returnMainMarkerPosition();
   resetAddressCoordinates();
+  updateAvatarImage();
+  updatePhotoHousing();
 });
 
 const checkStatus = (response) => {
@@ -153,7 +155,17 @@ fileChoserHousing.addEventListener('change', () => {
 
     reader.readAsDataURL(file);
   }
+  fileChoserHousing.setAttribute('disabled', 'disabled');
 });
+
+// Функция обновления аватарки после отправки формы
+const updateAvatarImage = () => previewAvatar.src = 'img/muffin-grey.svg';
+
+// Функция обновления фотографии жилья после отправки формы
+const updatePhotoHousing = () => {
+  previewPhotoHousing.innerHTML = '';
+  fileChoserHousing.removeAttribute('disabled');
+};
 
 // Отправка формы
 adForm.addEventListener('submit', (evt) => {
@@ -164,6 +176,8 @@ adForm.addEventListener('submit', (evt) => {
     .then(checkStatus)
     .then(() => adForm.reset())
     .then(() => returnMainMarkerPosition())
+    .then(updateAvatarImage)
+    .then(updatePhotoHousing)
     .then(() => showSuccessfulMessage(successBlock))
     .catch(() => showErrorMessage(error))
 });
