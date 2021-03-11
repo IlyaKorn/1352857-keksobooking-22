@@ -51,6 +51,7 @@ const activatePage = () => {
   adForm.classList.remove('ad-form--disabled');
   mapFilters.classList.remove('map__filters--disabled');
   mapFiltersFieldSetFeatures.removeAttribute('disabled');
+  loadingAvatar.removeAttribute('disabled');
   for (const value of  adFormFieldSet) {
     value.removeAttribute('disabled');
   }
