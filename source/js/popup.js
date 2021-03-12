@@ -1,4 +1,5 @@
 'use strict';
+
 const templateFragment = document.querySelector('#card').content;
 
 const getTypePalace = (typeHousing) => {

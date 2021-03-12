@@ -1,4 +1,5 @@
 'use strict';
+
 import {drawMapElements} from './map.js';
 import {filteringAds} from './filter.js';
 

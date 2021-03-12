@@ -1,6 +1,6 @@
 'use strict';
 
-/* global _:readonly */
+import _ from 'lodash';
 
 import {drawMapElements}  from './map.js';
 import {removeMarkers} from './map.js';

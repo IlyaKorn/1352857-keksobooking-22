@@ -1,4 +1,5 @@
 'use strict';
+
 import {returnMainMarkerPosition} from './map.js';
 import {pullDataServer} from './server.js';
 import {resetAddressCoordinates} from './map.js';
