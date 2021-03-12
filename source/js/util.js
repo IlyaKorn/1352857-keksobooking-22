@@ -1,5 +1,7 @@
-//import _ from ('lodash');
-/* global _:readonly */
+'use strict'
+
+import _ from 'lodash';
+
 const getRandomNumber = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max)
