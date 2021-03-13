@@ -2,7 +2,6 @@ const quantityRoomsForm = document.querySelector('#room_number');
 const quantityGuestsPlaceForm = document.querySelector('#capacity');
 const quantityGuestValues = quantityGuestsPlaceForm.children;
 
-
 const disablePlaceForm = function (listElements) {
   for (let currentValue of listElements) {
     currentValue.setAttribute('disabled', 'disabled');
@@ -32,7 +31,6 @@ const checkRoomsPlaceForm = function () {
     quantityGuestsPlaceForm.value = '0';
   }
 };
-
 
 quantityRoomsForm.addEventListener('change', checkRoomsPlaceForm);
 

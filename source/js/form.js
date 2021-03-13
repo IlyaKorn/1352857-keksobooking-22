@@ -5,7 +5,6 @@ import {pullDataServer} from './server.js';
 import {resetAddressCoordinates} from './map.js';
 
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-
 const typeBuilding = document.querySelector('#type');
 const cellPrice = document.querySelector('#price');
 const timeIn = document.querySelector('#timein');
@@ -25,7 +24,6 @@ const avatarBlock = document.querySelector('.ad-form-header__preview');
 const previewAvatar = avatarBlock.querySelector('img');
 const fileChoserHousing = document.querySelector('#images');
 const previewPhotoHousing = document.querySelector('.ad-form__photo');
-
 
 const minPrice = {
   flat: 1000,
@@ -48,22 +46,20 @@ const onTimeOutChange = () => {
   timeIn.selectedIndex = timeOut.selectedIndex;
 };
 
-// Обработчики события "Время заезда и выезда"
 typeBuilding.addEventListener('change', onTypeBuldingChange);
 timeIn.addEventListener('change', onTimeInChange);
 timeOut.addEventListener('change', onTimeOutChange);
 
-// Закрытие окна по успешной отправке при использовании клика на произвольную область
 const onCloseModalMessageClickk = (element) => {
   document.addEventListener('click', () => {
     removeMessageElement(element);
   });
 };
-// Функция удаления элемента из DOM
+
 const removeMessageElement = (element) => {
   element.remove();
 };
-//Закрытие окна по успешной отправке при нажатии на 'ESC'
+
 const onCloseModalMessage = (element) => {
   window.addEventListener('keydown', (evt) => {
     if (evt.keyCode === 27) {
@@ -71,7 +67,7 @@ const onCloseModalMessage = (element) => {
     }
   });
 };
-// Показ сообщения при успешной отправки формы, а также вызов функции с обработчиками по закрытию
+
 const showSuccessfulMessage = (element) => {
   promoBlock.insertAdjacentElement('beforebegin', element);
   onCloseModalMessage(successBlock);
@@ -79,14 +75,12 @@ const showSuccessfulMessage = (element) => {
   return element;
 };
 
-//Обработчик события по закртию окна с ошибкой по нажатию на кнопку закрытия
 const onCloseButtonErrorMesage = () => {
   buttonClose.addEventListener('click', () => {
     removeMessageElement(error);
   });
 };
 
-//Показ окна если при отправке возникла ошибка, а также вызов функции с обработчиками по его закрытию
 const showErrorMessage = (element) => {
   promoBlock.insertAdjacentElement('beforebegin', element);
   onCloseModalMessage(error);
@@ -94,8 +88,6 @@ const showErrorMessage = (element) => {
   onCloseButtonErrorMesage();
   return element;
 };
-
-//Сброс формы по нажатию кнопки "Очистить"
 
 clearButton.addEventListener('click', (evt) => {
   evt.preventDefault();
@@ -114,7 +106,6 @@ const checkStatus = (response) => {
   }
 };
 
-// Загрузка аватара
 fileChoser.addEventListener('change', () => {
   const file = fileChoser.files[0];
   const fileName = file.name.toLowerCase();
@@ -134,7 +125,6 @@ fileChoser.addEventListener('change', () => {
   }
 });
 
-// Загрузка фотографии жилья
 fileChoserHousing.addEventListener('change', () => {
   const imageItem = new Image(70, 70);
   imageItem.setAttribute('alt', 'Фотография жилья');
@@ -159,16 +149,13 @@ fileChoserHousing.addEventListener('change', () => {
   fileChoserHousing.setAttribute('disabled', 'disabled');
 });
 
-// Функция обновления аватарки после отправки формы
 const updateAvatarImage = () => previewAvatar.src = 'img/muffin-grey.svg';
 
-// Функция обновления фотографии жилья после отправки формы
 const updatePhotoHousing = () => {
   previewPhotoHousing.innerHTML = '';
   fileChoserHousing.removeAttribute('disabled');
 };
 
-// Отправка формы
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const formData = new FormData(evt.target);

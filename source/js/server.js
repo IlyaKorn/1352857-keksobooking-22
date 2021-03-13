@@ -5,6 +5,7 @@ import {filteringAds} from './filter.js';
 
 const SERVER_DATA = 'https://22.javascript.pages.academy/keksobooking/data';
 const SERVER_POST = 'https://22.javascript.pages.academy/keksobooking';
+
 const displayErrorMessage = () => {
   const promo = document.querySelector('.promo');
   const divError = document.createElement('div');
@@ -26,7 +27,7 @@ const displayErrorMessage = () => {
   divError.style.width = '1200px';
   divError.style.marginBottom = '100px';
   promo.insertAdjacentElement('beforebegin', divError);
-  setTimeout(function() {
+  setTimeout(() => {
     divError.remove()
   }, 3000)
 };
@@ -40,7 +41,6 @@ const checkServerStatus = (response) => {
     throw new Error (`${status} - ${statusText}`);
   }
 };
-
 
 fetch(SERVER_DATA)
   .then(checkServerStatus)

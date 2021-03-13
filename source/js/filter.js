@@ -1,12 +1,10 @@
 'use strict';
 
 import _ from 'lodash';
-
 import {drawMapElements}  from './map.js';
 import {removeMarkers} from './map.js';
 
 const DELAY_TIMER = 500;
-
 const mapFilters = document.querySelector('.map__filters');
 const housingType = mapFilters.querySelector('#housing-type');
 const housingPrice = mapFilters.querySelector('#housing-price');
@@ -29,7 +27,6 @@ const PriceLength = {
   },
 };
 
-// Шаблон фильтрации форм
 const filteringItem = (element, property, meaning) => {
   if (property.value === 'any') {
     return true;
@@ -37,12 +34,10 @@ const filteringItem = (element, property, meaning) => {
   return element.offer[meaning].toString() === property.value;
 };
 
-// Функция фильтрация жилья
 const filteringType = (element) => {
   return filteringItem(element, housingType, 'type');
 };
 
-// Фильтрация формы цены
 const filteringItemPrice = (element) => {
   const filteringPrice = PriceLength[housingPrice.value.toUpperCase()];
   if (housingPrice.value === 'any') {
@@ -51,17 +46,14 @@ const filteringItemPrice = (element) => {
   return element.offer.price >= filteringPrice.MIN && element.offer.price <= filteringPrice.MAX;
 };
 
-// Фильтрация  формы комнат
 const filteringRooms = (element) => {
   return filteringItem(element, housingRooms, 'rooms');
 };
 
-// Фильтрация формы гостей
 const filteringGuests = (element) => {
   return filteringItem(element, housingGuests, 'guests');
 };
 
-//Фильтрация удобств
 const filteringFeatures = (element) => {
   const checkedFeatures = housingFeatures.querySelectorAll('input:checked');
   return Array.from(checkedFeatures).every((item) => {
@@ -69,7 +61,6 @@ const filteringFeatures = (element) => {
   });
 };
 
-// Фильтрация формы по объявлениям
 const filteringAds = (housingElements) => {
   mapFilters.addEventListener('change', _.debounce(() => {
     const sameTypeHousing = housingElements.filter(filteringType)

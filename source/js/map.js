@@ -1,4 +1,5 @@
 'use strict';
+
 //import L from 'leaflet';
 /* global L:readonly */
 import {getPopUp} from './popup.js';
