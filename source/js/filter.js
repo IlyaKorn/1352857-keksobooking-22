@@ -34,8 +34,8 @@ const filteringItem = (element, property, meaning) => {
   return element.offer[meaning].toString() === property.value;
 };
 
-const filteringType = (element) => {
-  return filteringItem(element, housingType, 'type');
+const filteringItemsHousing = (element) => {
+  return filteringItem(element, housingType, 'type') && filteringItem(element, housingRooms, 'rooms') && filteringItem(element, housingGuests, 'guests');
 };
 
 const filteringItemPrice = (element) => {
@@ -44,14 +44,6 @@ const filteringItemPrice = (element) => {
     return true
   }
   return element.offer.price >= filteringPrice.MIN && element.offer.price <= filteringPrice.MAX;
-};
-
-const filteringRooms = (element) => {
-  return filteringItem(element, housingRooms, 'rooms');
-};
-
-const filteringGuests = (element) => {
-  return filteringItem(element, housingGuests, 'guests');
 };
 
 const filteringFeatures = (element) => {
@@ -63,10 +55,8 @@ const filteringFeatures = (element) => {
 
 const filteringAds = (housingElements) => {
   mapFilters.addEventListener('change', _.debounce(() => {
-    const sameTypeHousing = housingElements.filter(filteringType)
+    const sameTypeHousing = housingElements.filter(filteringItemsHousing)
       .filter(filteringItemPrice)
-      .filter(filteringRooms)
-      .filter(filteringGuests)
       .filter(filteringFeatures);
     removeMarkers();
     drawMapElements(sameTypeHousing);

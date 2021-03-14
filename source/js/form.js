@@ -50,7 +50,7 @@ typeBuilding.addEventListener('change', onTypeBuldingChange);
 timeIn.addEventListener('change', onTimeInChange);
 timeOut.addEventListener('change', onTimeOutChange);
 
-const onCloseModalMessageClickk = (element) => {
+const onCloseModalMessageClick = (element) => {
   document.addEventListener('click', () => {
     removeMessageElement(element);
   });
@@ -68,25 +68,17 @@ const onCloseModalMessage = (element) => {
   });
 };
 
-const showSuccessfulMessage = (element) => {
+const showMessageResult = (element) => {
   promoBlock.insertAdjacentElement('beforebegin', element);
-  onCloseModalMessage(successBlock);
-  onCloseModalMessageClickk(successBlock);
+  onCloseModalMessage(element);
+  onCloseModalMessageClick(element);
   return element;
 };
 
-const onCloseButtonErrorMesage = () => {
+const onCloseButtonErrorMessage = () => {
   buttonClose.addEventListener('click', () => {
     removeMessageElement(error);
   });
-};
-
-const showErrorMessage = (element) => {
-  promoBlock.insertAdjacentElement('beforebegin', element);
-  onCloseModalMessage(error);
-  onCloseModalMessageClickk(error);
-  onCloseButtonErrorMesage();
-  return element;
 };
 
 clearButton.addEventListener('click', (evt) => {
@@ -166,6 +158,9 @@ adForm.addEventListener('submit', (evt) => {
     .then(() => returnMainMarkerPosition())
     .then(updateAvatarImage)
     .then(updatePhotoHousing)
-    .then(() => showSuccessfulMessage(successBlock))
-    .catch(() => showErrorMessage(error))
+    .then(() => showMessageResult(successBlock))
+    .catch(() => {
+      showMessageResult(error)
+      onCloseButtonErrorMessage()
+    })
 });
